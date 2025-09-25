@@ -23,7 +23,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 }
 
 
-export async function PATCH(req: NextRequest) {
+export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await dbConnect();
 
