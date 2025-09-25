@@ -21,11 +21,9 @@ export default function Gallery() {
   const [index, setIndex] = useState(0);
 
   return (
-    <section className="py-12 bg-pink-50">
+ 
             <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Gallery
-        </h2>
+       
 <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
   {images.map((img, i) => (
     <div key={i} className="relative group">
@@ -49,6 +47,5 @@ export default function Gallery() {
         index={index}
       />
       </div>
-    </section>
   );
 }
