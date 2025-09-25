@@ -1,0 +1,153 @@
+
+"use client";
+import { useState, useEffect } from "react";
+import BookingForm from "@/components/BookingForm";
+import Gallery from "@/components/Gallery";
+
+export default function HomePage() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [services, setServices] = useState<any[]>([]);
+    // Load services
+    useEffect(() => {
+      fetch("/api/services")
+        .then((res) => res.json())
+        .then((data) => setServices(Array.isArray(data) ? data : JSON.parse(data)));
+    }, []);
+
+  const menuItems = [
+    { label: "About Us", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Gallery", href: "#gallery" },
+    { label: "Book Now", href: "#booking" },
+  ];
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Header */}
+      <header className="relative bg-gradient-to-r from-pink-400 to-purple-500 text-white">
+        <nav className="flex items-center justify-between p-6 max-w-7xl mx-auto">
+          <div className="text-2xl font-bold">Kate's Nails & Beauty</div>
+
+          {/* Desktop Menu */}
+          <ul className="hidden md:flex space-x-6">
+            {menuItems.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  onClick={(e) => handleScroll(e, item.href)}
+                  className="hover:underline"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {menuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </nav>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <ul className="flex flex-col space-y-4 p-6 bg-pink-500 md:hidden">
+            {menuItems.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  onClick={(e) => handleScroll(e, item.href)}
+                  className="block text-white font-semibold text-lg"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Hero */}
+        <div
+      className="relative w-full h-[500px] lg:h-[650px] bg-center bg-cover"
+      style={{ backgroundImage: "url('/images/banner-desktop.png')" }}
+    ></div>
+      </header>
+
+      {/* About Section */}
+      <section id="about" className="max-w-7xl mx-auto py-20 px-4">
+        <h2 className="text-3xl font-bold mb-6 text-center">About Us</h2>
+        <p className="text-center text-gray-700 max-w-3xl mx-auto">
+          At SalonName, we provide a relaxing and professional beauty experience. From
+          manicures and pedicures to facials and massages, our certified staff ensures
+          every visit leaves you feeling pampered and refreshed.
+        </p>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="bg-gray-50 py-20 px-4">
+        <h2 className="text-3xl font-bold mb-10 text-center">Our Services</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {Array.isArray(services) && services.map((s) => (
+            <div
+              key={s._id}
+              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition"
+            >
+              <h3 className="font-semibold text-xl mb-2">{s.name}</h3>
+              <p className="text-gray-600 mb-2">Price: ${s.price}</p>
+              <p className="text-gray-600">Duration: {s.duration} mins</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <Gallery />
+
+      {/* Booking Form Section */}
+      <section id="booking" className="bg-pink-50 py-20 px-4">
+        <h2 className="text-3xl font-bold mb-10 text-center">Book Your Appointment</h2>
+        <BookingForm services={services} />
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-white py-10 text-center">
+        &copy; {new Date().getFullYear()} SalonName. All rights reserved.
+      </footer>
+    </div>
+  );
+}
