@@ -6,6 +6,7 @@ import Gallery from "@/components/Gallery";
 import HeroBanner from "@/components/HeroBanner";
 
 import Link from "next/link";
+import ServicesSection from "@/components/ServicesSection";
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -150,25 +151,11 @@ export default function HomePage() {
 
 
       {/* Services Section */}
-      <section id="services" className="bg-gray-50 py-20 px-4">
-        <h2 className="text-3xl font-bold mb-10 text-center">Our Services</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {Array.isArray(services) && services.map((s) => (
-            <div
-              key={s._id}
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition"
-            >
-              <h3 className="font-semibold text-xl mb-2">{s.name}</h3>
-              <p className="text-gray-600 mb-2">Price: ${s.price}</p>
-              <p className="text-gray-600">Duration: {s.duration} mins</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <ServicesSection />
 
       {/* Gallery Section */}
       <section id="gallery" className="py-20 bg-gray-50">
-        <h2 className="text-3xl font-bold text-center mb-8">Gallery</h2>
+        <h2 className="text-3xl font-bold text-center mb-8">Our Gallery</h2>
         <Gallery />
       </section>
 
