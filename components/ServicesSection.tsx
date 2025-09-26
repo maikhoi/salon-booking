@@ -97,7 +97,7 @@ export default function ServicesSection() {
                     className="
                       bg-white rounded-lg shadow hover:shadow-lg transition
                       p-6 text-center flex flex-col justify-between snap-start
-                      h-40 sm:h-36
+                      h-46 sm:h-36
                     "
                   >
                     <h3 className="text-lg font-semibold text-gray-800">
