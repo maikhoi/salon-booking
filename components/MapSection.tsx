@@ -17,7 +17,7 @@ export default function MapSection({ defaultAddress }: MapSectionProps) {
         <h2 className="text-3xl font-bold text-pink-700 mb-8">Find Us</h2>
 
         {/* Address Input */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
+        <div className="hidden flex flex-col sm:flex-row justify-center items-center gap-4 mb-6">
           <input
             type="text"
             value={address}

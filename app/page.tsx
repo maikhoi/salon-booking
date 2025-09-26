@@ -166,7 +166,7 @@ export default function HomePage() {
       <TestimonialsSection />
 
       {/* Map Section */}
-      <MapSection defaultAddress="24 Barber Drive, Hoppers Crossing, VIC 3029, Australia" />
+      <MapSection defaultAddress="Kate's+Nails+and+Beauty, Hoppers Crossing, VIC 3029, Australia" />
 
       {/* Booking Form Section */}
       <section id="booking" className="bg-pink-50 py-20 px-4">

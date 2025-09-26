@@ -10,10 +10,11 @@ interface Testimonial {
 }
 
 const testimonials: Testimonial[] = [
-  { id: 1, name: "Sophia L.", feedback: "Kate and the team are amazing! My nails have never looked better.", rating: 5 },
-  { id: 2, name: "Emma R.", feedback: "Professional and friendly service. Highly recommend!", rating: 5 },
-  { id: 3, name: "Hannah T.", feedback: "A relaxing experience and fantastic results.", rating: 4 },
-  { id: 4, name: "Mia C.", feedback: "Clean, comfortable and great prices.", rating: 5 },
+  { id: 1, name: "Elena S..", feedback: "Kate was amazing, very flexible with what time suited me best. She is very welcoming and kind!", rating: 5 },
+  { id: 2, name: "Jess G.", feedback: "I have been seeing Kate every 2-3 weeks and she never disappoints! Her nails are absolutely stunning and her work is flawless. I will honestly never see another nail tech again! 💅🏼🥰 highly recommend!", rating: 5 },
+  { id: 3, name: "Vanessa R.", feedback: "Amazing service!! I’ve been coming to Kate for a year now and she’s always pulled through with the most perfect and gorgeous nails for me. She’s always willing to try new and bizarre nail designs that I bring her and I’m never left disappointed. Highly recommend!!!", rating: 5 },
+  { id: 4, name: "Tracy T.", feedback: "I did my pedicure and a full set with gel here. Kate did excellent work at a very good price. The place and tools are clean and new. Highly recommended!!!", rating: 5 },
+  { id: 5, name: "Angie W.", feedback: "Good experience here. would like to share to everyone come and get Nail spa pedicure Very detailed clean very professional.Let come visit lovely lady .😊", rating: 5 },
 ];
 
 export default function TestimonialsSection() {
