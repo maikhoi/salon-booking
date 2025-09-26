@@ -7,6 +7,9 @@ import HeroBanner from "@/components/HeroBanner";
 
 import Link from "next/link";
 import ServicesSection from "@/components/ServicesSection";
+import MapSection from "@/components/MapSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -159,6 +162,12 @@ export default function HomePage() {
         <Gallery />
       </section>
 
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
+      {/* Map Section */}
+      <MapSection defaultAddress="24 Barber Drive, Hoppers Crossing, VIC 3029, Australia" />
+
       {/* Booking Form Section */}
       <section id="booking" className="bg-pink-50 py-20 px-4">
         <h2 className="text-3xl font-bold mb-10 text-center">Book Your Appointment</h2>
@@ -166,9 +175,7 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-10 text-center">
-        &copy; {new Date().getFullYear()} Kate's Nails & Beauty. All rights reserved.
-      </footer>
+      <Footer />
     </div>
   );
 }
