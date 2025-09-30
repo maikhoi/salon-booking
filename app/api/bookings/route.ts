@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Booking from "@/models/Booking";
-import mongoose from "mongoose";
+import Service from "@/models/Service";
 import { sendEmail } from "@/lib/email";
 
 
@@ -20,27 +20,44 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     const body = await req.json();
-     // Ensure service is a proper ObjectId
-    const serviceId = new mongoose.Types.ObjectId(body.service);
+    const { name, email, phone, serviceId, date, time, note } = body;
 
+    // Lookup service by ID
+    const service = await Service.findById(serviceId);
+    if (!service) {
+      return NextResponse.json(
+        { error: "Invalid service selected" },
+        { status: 400 }
+      );
+    }
+    // Save booking with note
     const booking = await Booking.create({
-      service: serviceId, // ObjectId from form
-      name: body.name,
-      email: body.email,
-      phone: body.phone,
-      date: body.date,
-      time: body.time,
-      note: body.note || "", // 👈 must be passed here
+      name,
+      email,
+      service: service._id,
+      date,
+      time,
+      note,
     });
 
     // Email to customer
+    // Send email with service name + note
     await sendEmail(
-      booking.email,
-      "Your booking is confirmed",
-      `<p>Hi ${booking.name},</p>
-       <p>We’ve received your booking for <b>${booking.date}</b> at <b>${booking.time}</b>.</p>
-       <p>Service: ${booking.service}</p>
-       <p>See you soon!</p>`
+      email,
+      "Booking Confirmation - Kate's Nails & Beauty",
+      `
+        <h2>Booking Confirmed</h2>
+        <p>Dear ${name},</p>
+        <p>Your booking is confirmed for:</p>
+        <ul>
+          <li><strong>Service:</strong> ${service.name}</li>
+          <li><strong>Date:</strong> ${date}</li>
+          <li><strong>Time:</strong> ${time}</li>
+          ${note ? `<li><strong>Note:</strong> ${note}</li>` : ""}
+        </ul>
+        <p>Thank you for choosing Kate's Nails & Beauty 💅</p>
+      `,
+      process.env.LOG_EMAIL //
     );
 
     // Email to your wife (salon owner)
@@ -48,11 +65,13 @@ export async function POST(req: Request) {
       process.env.OWNER_EMAIL!,
       "New booking received",
       `<p>You have a new booking:</p>
-       <p>Name: ${booking.name}</p>
-       <p>Email: ${booking.email}</p>
-       <p>Phone: ${booking.phone}</p>
-       <p>Date: ${booking.date} at ${booking.time}</p>
-       <p>Notes: ${booking.notes}</p>`
+       <p>Name: ${name}</p>
+       <p>Email: ${email}</p>
+       <p>Phone: ${phone}</p>
+       <p>Phone: ${service.name}</p>
+       <p>Date: ${date} at ${time}</p>
+       <p>Notes: ${note}</p>`,
+       process.env.LOG_EMAIL //
     );
     
     return new Response(JSON.stringify(booking), { status: 201 });
