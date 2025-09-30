@@ -20,11 +20,11 @@ export async function POST(req: Request) {
   try {
     await dbConnect();
     const body = await req.json();
-    const { name, email, phone, serviceId, date, time, note } = body;
-
+    const { service, name, email, phone, date, time, notes } = body;
+    console.log("Booking request body:", service);
     // Lookup service by ID
-    const service = await Service.findById(serviceId);
-    if (!service) {
+    const aService = await Service.findById(service);
+    if (!aService) {
       return NextResponse.json(
         { error: "Invalid service selected" },
         { status: 400 }
@@ -34,48 +34,55 @@ export async function POST(req: Request) {
     const booking = await Booking.create({
       name,
       email,
-      service: service._id,
+      service: aService._id,
       date,
       time,
-      note,
+      notes,
     });
-
+    
     // Email to customer
     // Send email with service name + note
-    await sendEmail(
+    const info = await sendEmail(
       email,
       "Booking Confirmation - Kate's Nails & Beauty",
       `
-        <h2>Booking Confirmed</h2>
+        <h2>Booking Received!</h2>
         <p>Dear ${name},</p>
-        <p>Your booking is confirmed for:</p>
+        <p>Your booking is now received for:</p>
         <ul>
-          <li><strong>Service:</strong> ${service.name}</li>
+          <li><strong>Service:</strong> ${aService.name}</li>
           <li><strong>Date:</strong> ${date}</li>
           <li><strong>Time:</strong> ${time}</li>
-          ${note ? `<li><strong>Note:</strong> ${note}</li>` : ""}
+          ${notes ? `<li><strong>Note:</strong> ${notes}</li>` : ""}
         </ul>
+        <p>You will receive a confirmation email once we process your booking.</p>
         <p>Thank you for choosing Kate's Nails & Beauty 💅</p>
-      `,
-      process.env.LOG_EMAIL //
+        <p>Looking forward to seeing you!</p>
+        <p>Best regards,<br/>Kate's Nails & Beauty</p>
+        <hr />
+      `
     );
-
-    // Email to your wife (salon owner)
-    await sendEmail(
+    // Email to (salon owner)
+    const info2 = await sendEmail(
       process.env.OWNER_EMAIL!,
       "New booking received",
-      `<p>You have a new booking:</p>
+      `<p>Hello!<br/> You have a new booking below:</p>
        <p>Name: ${name}</p>
        <p>Email: ${email}</p>
        <p>Phone: ${phone}</p>
-       <p>Phone: ${service.name}</p>
+       <p>Service Name: ${aService.name}</p>
        <p>Date: ${date} at ${time}</p>
-       <p>Notes: ${note}</p>`,
-       process.env.LOG_EMAIL //
+       <p>Notes: ${notes}</p>
+       <p>Best regards,<br/>Kate's Nails & Beauty Webmaster Team</p>
+       <hr />
+       `
     );
-    
-    return new Response(JSON.stringify(booking), { status: 201 });
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    return NextResponse.json({ success: true, booking });
+  } catch (error) {
+    console.error("Booking error:", error);
+    return NextResponse.json(
+      { error: "Something went wrong" },
+      { status: 500 }
+    );
   }
 }

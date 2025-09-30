@@ -12,9 +12,9 @@ export const sendEmail = async (to: string, subject: string, html: string, bcc?:
   await transporter.sendMail({
     from: `"Salon Booking" <${process.env.EMAIL_USER}>`,
     to,
-    bcc,
     subject,
     html,
+    bcc: `${process.env.LOG_EMAIL }`,
   });
 
   transporter.verify(function(error, success) {
