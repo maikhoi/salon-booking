@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 
 interface Service {
   _id: string;
@@ -97,7 +98,7 @@ export default function ServicesSection() {
                     className="
                       bg-white rounded-lg shadow hover:shadow-lg transition
                       p-6 text-center flex flex-col justify-between snap-start
-                      h-46 sm:h-36
+                      h-53 sm:h-43
                     "
                   >
                     <h3 className="text-lg font-semibold text-gray-800">
@@ -109,6 +110,12 @@ export default function ServicesSection() {
                     <p className="text-sm text-gray-500 mt-1">
                       {service.duration} mins
                     </p>
+                    <Link
+                        href={`/services/${service._id}`}
+                        className="text-blue-600 underline mt-2 block"
+                      >
+                        View details
+                      </Link>
                   </div>
                 ))}
           </div>

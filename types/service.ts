@@ -1,5 +1,5 @@
-export interface Service {
-  _id: string;
+export interface IService {
+  _id?: string;
   name: string;
   price: number;
   duration: string;

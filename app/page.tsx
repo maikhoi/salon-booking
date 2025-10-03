@@ -11,6 +11,7 @@ import MapSection from "@/components/MapSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 
+
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -118,7 +119,7 @@ export default function HomePage() {
           {/* Image */}
           <div className="flex justify-center">
             <img
-              src="/about-kate.png"
+              src="/about-kate.jpg"
               alt="Kate at work"
               className="rounded-2xl shadow-lg w-full max-w-md object-cover"
             />
