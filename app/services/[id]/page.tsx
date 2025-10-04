@@ -2,10 +2,18 @@ import { Metadata } from "next";
 import { getServiceById } from "@/lib/services";
 import { IService } from "@/types/service";
 
+
+interface PageProps {
+    params: {
+      id: string;
+    };
+  }
+
 export async function generateMetadata(
   { params }: { params: { id: string } }
 ): Promise<Metadata> {
-  const service: IService | null = await getServiceById(params.id);
+    const { id } = await params; // 👈 await params
+  const service: IService | null = await getServiceById(id);
 
   if (!service) {
     return {
@@ -33,8 +41,9 @@ export async function generateMetadata(
 }
 
 // Page content
-export default async function ServicePage({ params }: { params: { id: string } }) {
-  const service: IService | null = await getServiceById(params.id);
+export default async function ServicePage({ params }: PageProps) { 
+    const { id } = await params; // 👈 await params
+  const service = await getServiceById(id);
 
   if (!service) {
     return <div className="p-6 text-center">Service not found.</div>;
