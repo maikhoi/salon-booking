@@ -4,15 +4,13 @@ import { IService } from "@/types/service";
 
 
 interface PageProps {
-    params: {
-      id: string;
-    };
+    params: Promise<{ id: string }>;
   }
 
 export async function generateMetadata(
-  { params }: { params: { id: string } }
+  { params }: PageProps
 ): Promise<Metadata> {
-    const { id } = await params; // 👈 await params
+  const { id } = await params; // 👈 await params
   const service: IService | null = await getServiceById(id);
 
   if (!service) {
@@ -42,7 +40,7 @@ export async function generateMetadata(
 
 // Page content
 export default async function ServicePage({ params }: PageProps) { 
-    const { id } = await params; // 👈 await params
+  const { id } = await params;  
   const service = await getServiceById(id);
 
   if (!service) {
