@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import LayoutClient from "../components/LayoutClient"
+import Footer from "../components/Footer"
 
 export const metadata: Metadata = {
   title: "Kate Nails & Beauty",
@@ -86,7 +88,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <LayoutClient />
+        <main>{children}</main>
+        <Footer />
+        </body>
     </html>
   );
 }

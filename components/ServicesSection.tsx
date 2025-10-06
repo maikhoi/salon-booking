@@ -40,7 +40,7 @@ export default function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-16 bg-pink-50">
+    <section id="services" className="py-16 bg-pink-50 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 relative">
         <h2 className="text-3xl font-bold text-center text-pink-700 mb-8">
           Our Services
