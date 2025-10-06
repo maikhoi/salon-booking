@@ -30,7 +30,7 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://instagram.com/katenailsandbeauty"
+            href="https://instagram.com/kate_nails_hopperscrossing"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative w-14 h-14 rounded-full bg-white shadow-lg hover:shadow-pink-200 flex items-center justify-center transition-all duration-300 hover:scale-110"
