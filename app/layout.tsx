@@ -4,13 +4,20 @@ import LayoutClient from "../components/LayoutClient"
 import Footer from "../components/Footer"
 
 export const metadata: Metadata = {
-  title: "Kate Nails & Beauty",
+  title: "Kate Nails & Beauty | Hoppers Crossing Nail Salon",
   description:
-    "Kate Nails & Beauty – Professional nail and beauty salon in Melbourne. Expert care, modern techniques, and a relaxing experience.",
+    "Pamper yourself at Kate’s Nails & Beauty — a cozy, professional nail salon in Hoppers Crossing offering gel nails, manicures, and elegant nail art.",
+  keywords: [
+      "nail salon Hoppers Crossing",
+      "gel nails Hoppers Crossing",
+      "manicure Hoppers Crossing",
+      "Kate’s Nails & Beauty",
+    ],
+  metadataBase: new URL("https://katenails.beauty"),
   openGraph: {
-    title: "Kate Nails & Beauty",
+    title: "Kate Nails & Beauty | Hoppers Crossing Nail Salon",
     description:
-      "Professional nail and beauty salon in Melbourne. Expert care, modern techniques, and a relaxing experience.",
+      "Pamper yourself at Kate’s Nails & Beauty — a cozy, professional nail salon in Hoppers Crossing offering gel nails, manicures, and elegant nail art.",
     url: "https://katenails.beauty",
     siteName: "Kate Nails & Beauty",
     images: [
@@ -26,9 +33,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kate Nails & Beauty",
+    title: "Kate Nails & Beauty | Hoppers Crossing Nail Salon",
     description:
-      "Professional nail and beauty salon in Melbourne. Expert care, modern techniques, and a relaxing experience.",
+      "Experience elegant, long-lasting nails in Hoppers Crossing — book your appointment today.",
     images: ["/og-image.jpg"],
   },
 };
@@ -47,6 +54,7 @@ export default function RootLayout({
     "@id": "https://katenails.beauty",
     url: "https://katenails.beauty",
     telephone: "+61 422 877 387", 
+    "priceRange": "$$",
     address: {
       "@type": "PostalAddress",
       streetAddress: "24 Barber Drive",
@@ -76,7 +84,7 @@ export default function RootLayout({
     ],
     sameAs: [
       "https://www.facebook.com/100094663601003",  
-      "https://www.instagram.com/katenailsandbeauty/",
+      "https://www.instagram.com/kate_nails_hopperscrossing/",
     ],
   };
 
