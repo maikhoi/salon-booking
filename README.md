@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💅 Salon Booking Website
 
-## Getting Started
+A modern and responsive **salon booking platform** built with **Next.js 15** and **React**.  
+This website allows customers to explore services, make online bookings, and contact the salon easily — while providing salon owners with a simple, professional online presence.
 
-First, run the development server:
+---
+
+## 🚀 Live Demo
+
+👉 [View Live on Vercel](https://salon-booking-iota.vercel.app/)
+
+---
+
+## ✨ Features
+
+- 🗓️ **Online Booking System** — Simple and intuitive appointment scheduling.  
+- 💇‍♀️ **Service Display** — Showcase your salon’s treatments, prices, and time (duration).  
+- 📱 **Responsive Design** — Optimized for both mobile and desktop users.  
+- 📧 **Email Notifications** — Sends booking confirmations and updates.  
+- ⚙️ **Admin Dashboard** — Manage appointments and blocked times easily.  
+- 🌐 **SEO Optimized** — Ready for Google Search and social sharing.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** Next.js 15, React, Tailwind CSS  
+- **Backend:** Next.js API Routes  
+- **Database:** MongoDB (via Mongoose)  
+- **Deployment:** Vercel  
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file in the root directory with the following keys:
 
 ```bash
+MONGODB_URI=<your-mongodb-connection-string>
+NEXT_PUBLIC_API_URL=<https://your-production-url.vercel.app>
+EMAIL_USER=<your-email@example.com>
+EMAIL_PASS=<your-email-password>
+
+
+🔐 Environment variables should also be set up in your Vercel project under
+Project → Settings → Environment Variables.
+
+🧑‍💻 Local Development
+
+Clone the repository:
+
+git clone https://github.com/maikhoi/salon-booking.git
+cd salon-booking
+
+
+Install dependencies:
+
+npm install
+
+
+Run the development server:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open the site:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000
 
-## Learn More
+🌍 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This project is deployed with Vercel
+.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Each commit to the main branch triggers an automatic deployment to production.
+To manually deploy or redeploy, push changes to GitHub or click “Redeploy” in the Vercel dashboard.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+📸 Preview
 
-## Deploy on Vercel
+Sleek, mobile-friendly, and client-focused.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+🧾 License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the MIT License 
+
+💖 Created with love using Next.js and Vercel
