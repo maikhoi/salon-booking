@@ -17,6 +17,10 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
   const [bookings, setBookings] = useState<any[]>([]);
   const [message, setMessage] = useState("");
 
+  const [minDate, setMinDate] = useState("");
+  const [maxDate, setMaxDate] = useState("");
+  const blockedWeekdays = [5, 6]; // Friday (5) & Saturday (6)
+
   // Load services
   useEffect(() => {
     fetch("/api/services")
@@ -36,28 +40,42 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
 
   const timeSlots = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00"];
 
-  //Date restriction
+  // ✅ Corrected: Date restriction (client-side only)
+  useEffect(() => {
+    const now = new Date();
+    const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
+
+    const todayStr = local.toISOString().split("T")[0];
+
+    // allow 7 days from today (today + 6)
+    const maxDateObj = new Date(local);
+    maxDateObj.setDate(maxDateObj.getDate() + 6);
+    const maxStr = maxDateObj.toISOString().split("T")[0];
+
+    setMinDate(todayStr);
+    setMaxDate(maxStr);
+  }, []);
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selected = new Date(e.target.value);
+    const day = selected.getDay();
+
+    // ✅ Block Friday and Saturday
+    if (blockedWeekdays.includes(day)) {
+      alert("Sorry, bookings are not available on Friday or Saturday.");
+      setDate("");
+      return;
+    }
+
+    setDate(e.target.value);
+  };
+
+  //Time restriction
+  const now = new Date();
   const today = new Date();
   const yyyy = today.getFullYear();
   const mm = String(today.getMonth() + 1).padStart(2, "0");
   const dd = String(today.getDate()).padStart(2, "0");
-
-  const minDate = `${yyyy}-${mm}-${dd}`;
-
-  // Max date is today + 5 days
-  const maxDateObj = new Date(today);
-  maxDateObj.setDate(today.getDate() + 5);
-  const maxY = maxDateObj.getFullYear();
-  const maxM = String(maxDateObj.getMonth() + 1).padStart(2, "0");
-  const maxD = String(maxDateObj.getDate()).padStart(2, "0");
-
-  const maxDate = `${maxY}-${maxM}-${maxD}`;
-
-  // 0 = Sunday, 1 = Monday, ..., 5 = Friday, 6 = Saturday
-  const blockedWeekdays = [5,6]; // Friday & Saturday
-
-  //Time restriction
-  const now = new Date();
   const todayStr = `${yyyy}-${mm}-${dd}`;
 
   // Collect times that are unavailable
@@ -75,19 +93,7 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
     }
     return { time: slot, label: slot, disabled: false };
   });
-
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selected = new Date(e.target.value);
-    if (blockedWeekdays.includes(selected.getDay())) {
-      alert("Sorry, bookings are not available on Friday and Saturday.");
-      setDate(""); // reset
-      return;
-    }
-    setDate(e.target.value);
-  };
-
-
-
+  
   // Get selected service details
   const selectedService = services.find((s) => s._id === service);
 
