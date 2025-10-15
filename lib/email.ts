@@ -1,27 +1,24 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-export const sendEmail = async (to: string, subject: string, html: string, bcc?: string) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail", // or "hotmail", etc.
-    auth: {
-      user: process.env.EMAIL_USER, // your Gmail
-      pass: process.env.EMAIL_PASS, // app password (not your real Gmail password!)
-    },
-  });
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-  await transporter.sendMail({
-    from: `"Salon Booking" <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-    bcc: `${process.env.LOG_EMAIL }`,
-  });
-
-  transporter.verify(function(error, success) {
-    if (error) {
-        console.log(error);
-    } else {
-        console.log("Server is ready to take our messages");
-    }
+export const sendEmail = async (
+  to: string,
+  subject: string,
+  html: string,
+  bcc?: string
+) => {
+  try {
+    await resend.emails.send({
+      from: process.env.EMAIL_USER || "Salon Booking <no-reply@katenails.beauty>",
+      to,
+      subject,
+      html,
+      bcc: bcc || process.env.LOG_EMAIL,
     });
+
+    console.log("✅ Email sent successfully via Resend");
+  } catch (error) {
+    console.error("❌ Error sending email via Resend:", error);
+  }
 };
