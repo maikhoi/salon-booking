@@ -10,7 +10,7 @@ export const sendEmail = async (
 ) => {
   try {
     await resend.emails.send({
-      from: process.env.EMAIL_USER || "Salon Booking <no-reply@katenails.beauty>",
+      from: process.env.EMAIL_FROM || "Salon Booking <no-reply@katenails.beauty>",
       to,
       subject,
       html,
