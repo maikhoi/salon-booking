@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import LayoutClient from "../components/LayoutClient"
 import Footer from "../components/Footer"
@@ -101,6 +102,20 @@ export default function RootLayout({
         <LayoutClient />
         <main>{children}</main>
         <Footer />
+      {/*  <!-- Google tag (gtag.js) --> */}
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-GZH1PS11FW"
+          strategy="afterInteractive"></Script>
+      <Script id="ga-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-GZH1PS11FW', {
+            page_path: window.location.pathname,
+          });
+        `}
+      </Script>
         </body>
     </html>
   );
