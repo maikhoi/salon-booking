@@ -127,7 +127,16 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
       className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4"
     >
       <h2 className="text-xl font-bold">Book an Appointment</h2>
-
+<div className="p-3 bg-yellow-50 border border-yellow-300 rounded text-sm text-yellow-800">
+  <p className="font-semibold mb-1">⚠️ Temporary Notice</p>
+  <p>
+    Our online booking system is temporarily unavailable.
+    Please SMS <span className="font-semibold">0422877387</span> to make a booking.
+  </p>
+  <p className="mt-1">
+    Sorry for the inconvenience — we are working to put the booking system back online.
+  </p>
+</div>
       {/* Service Selection */}
       <select
         value={service}
