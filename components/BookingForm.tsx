@@ -89,11 +89,9 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
       const [hour, minute] = slot.split(":").map(Number);
       if (hour < now.getHours() || (hour === now.getHours() && minute <= now.getMinutes())) {
         return { time: slot, label: `${slot} (Past)`, disabled: true };
-      } else {
-        return { time: slot, label: `${slot} (Unavailable)`, disabled: true };
-      }
+      } 
     }
-    return { time: slot, label: slot, disabled: false };
+    return { time: slot, label: `${slot} (Unavailable)` , disabled: true };
   });
   
   // Get selected service details
