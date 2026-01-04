@@ -126,7 +126,7 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
       onSubmit={handleSubmit}
       className="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4"
     >
-      <h2 className="text-xl font-bold">Book an Appointment</h2>
+      <h2 className="text-xl font-bold">Make an Appointment</h2>
 <div className="p-3 bg-yellow-50 border border-yellow-300 rounded text-sm text-yellow-800">
   <p className="font-semibold mb-1">⚠️ Temporary Notice</p>
   <p>
@@ -134,7 +134,7 @@ export default function BookingForm({ services: initialServices = [] }: BookingF
     Please SMS <span className="font-semibold">0422877387</span> to make a booking.
   </p>
   <p className="mt-1">
-    Sorry for the inconvenience — we are working to put the booking system back online.
+    Our team is actively working on restoring the online booking system. Thank you for your patience in the meantime.
   </p>
 </div>
       {/* Service Selection */}
